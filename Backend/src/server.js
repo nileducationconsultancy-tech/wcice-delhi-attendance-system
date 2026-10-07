@@ -95,14 +95,16 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start Cron Jobs (for non-serverless environments)
-if (!process.env.VERCEL) {
+const isServerless = Boolean(process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME);
+
+if (!isServerless) {
     const startNightlyCheckoutJob = require('./jobs/nightlyCheckout');
     startNightlyCheckoutJob();
 }
 
 const PORT = process.env.PORT || 5000;
 
-if (!process.env.VERCEL) {
+if (!isServerless) {
     connectDB().then(async () => {
         await seedAdmin();
         await seedDefaultDocumentTypes();
