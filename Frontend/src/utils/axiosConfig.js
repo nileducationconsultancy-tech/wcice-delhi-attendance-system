@@ -1,6 +1,17 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
+const getApiBaseUrl = () => {
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl && envUrl.trim().length > 0) {
+        return envUrl.trim().replace(/\/+$/, '');
+    }
+    if (import.meta.env.DEV) {
+        return '';
+    }
+    return 'https://wcice-delhi-attendance-system.vercel.app';
+};
+
+axios.defaults.baseURL = getApiBaseUrl();
 axios.defaults.withCredentials = true;
 
 // Attach Bearer token from localStorage to support cross-domain deployments seamlessly

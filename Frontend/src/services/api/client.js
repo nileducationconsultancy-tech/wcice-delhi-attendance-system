@@ -1,7 +1,18 @@
 import axios from 'axios';
 
+const getApiBaseUrl = () => {
+    const envUrl = import.meta.env.VITE_API_URL;
+    if (envUrl && envUrl.trim().length > 0) {
+        return envUrl.trim().replace(/\/+$/, '');
+    }
+    if (import.meta.env.DEV) {
+        return '';
+    }
+    return 'https://wcice-delhi-attendance-system.vercel.app';
+};
+
 const client = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '',
+    baseURL: getApiBaseUrl(),
     withCredentials: true,
     timeout: 15000,
     headers: {
