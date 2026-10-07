@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+*.cert
+*.pfx
+service-account*.json
+serviceAccount*.json
+
+# Build & compiled outputs
+dist/
+dist-ssr/
+build/
+**/dist/
+**/build/
+.expo/
+**/.expo/
+.next/
+out/
+
+# Slips & Temporary Generated Artifacts
+slips/
+**/slips/*
+!**/slips/.gitkeep
+
+# Uploads & User Media
+uploads/
+**/uploads/*
+!**/uploads/.gitkeep
+
+# Logs & Debugging
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+coverage/
+.nyc_output/
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
