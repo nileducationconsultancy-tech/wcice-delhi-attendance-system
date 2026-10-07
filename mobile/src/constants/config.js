@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 
-const FALLBACK_PROD_URL = '';
+const FALLBACK_PROD_URL = 'https://wcice-delhi-attendance-system.vercel.app';
 
 // Dynamic API Base URL resolution:
 // 1. If EXPO_PUBLIC_API_URL is configured (e.g. production URL)
