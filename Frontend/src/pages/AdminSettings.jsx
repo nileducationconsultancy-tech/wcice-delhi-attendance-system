@@ -166,11 +166,11 @@ const AdminSettings = () => {
                                 <input 
                                     type="time" 
                                     name="shiftStartTime" 
-                                    value={settings?.shiftStartTime ?? '10:00'} 
+                                    value={settings?.shiftStartTime ?? '11:00'} 
                                     onChange={handleChange} 
                                     className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" 
                                 />
-                                <p className="text-[11px] text-slate-400 mt-1">Official work start time (10:00 AM)</p>
+                                <p className="text-[11px] text-slate-400 mt-1">Official work start time (11:00 AM)</p>
                             </div>
 
                             <div>
@@ -190,11 +190,11 @@ const AdminSettings = () => {
                                 <input 
                                     type="time" 
                                     name="halfDayCutoffTime" 
-                                    value={settings?.halfDayCutoffTime ?? '11:00'} 
+                                    value={settings?.halfDayCutoffTime ?? '14:00'} 
                                     onChange={handleChange} 
                                     className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" 
                                 />
-                                <p className="text-[11px] text-slate-400 mt-1">Check-in at or after this time is marked Half Day (11:00 AM)</p>
+                                <p className="text-[11px] text-slate-400 mt-1">Check-in at or after this time is marked Half Day (02:00 PM)</p>
                             </div>
 
                             <div>

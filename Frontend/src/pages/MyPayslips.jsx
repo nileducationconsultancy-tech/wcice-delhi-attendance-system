@@ -146,7 +146,6 @@ const MyPayslips = () => {
                                                     <span>•</span>
                                                     <span>Present: <strong className="text-emerald-700">{slip.presentDays}d</strong></span>
                                                     {slip.halfDays > 0 && <span>• Half: <strong className="text-amber-700">{slip.halfDays}d</strong></span>}
-                                                    {slip.lateDays > 0 && <span>• Late: <strong className="text-amber-700">{slip.lateDays}d</strong></span>}
                                                     {slip.absentDays > 0 && <span>• Absent: <strong className="text-rose-700">{slip.absentDays}d</strong></span>}
                                                 </div>
                                             </div>
@@ -242,13 +241,9 @@ const MyPayslips = () => {
                                                         <span>Half-Day Deduction ({slip.halfDays || 0}d @ 50%)</span>
                                                         <span className="font-bold text-rose-600">₹{Number(slip.halfDayDeduction || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                                                     </div>
-                                                    <div className="flex justify-between text-slate-600">
-                                                        <span>Late Check-in Deduction ({slip.lateDays || 0}d @ 25%)</span>
-                                                        <span className="font-bold text-rose-600">₹{Number(slip.lateDeduction || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                                                    </div>
                                                     {slip.otherDeductions > 0 && (
                                                         <div className="flex justify-between text-slate-600">
-                                                            <span>Other Deductions</span>
+                                                            <span>Other Deductions / Advance</span>
                                                             <span className="font-bold text-rose-600">₹{Number(slip.otherDeductions).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                                                         </div>
                                                     )}

@@ -63,15 +63,16 @@ const isSaturday = (dateInput) => {
     return dayStr === 'Sat';
 };
 
-// Determine attendance status based on check-in time (Cutoff: 11:00 AM)
-// Before 11:00 AM -> PRESENT (1.0 day)
-// 11:00 AM or later -> HALF_DAY (0.5 day)
-const determineAttendanceStatus = (checkInDate = new Date(), cutoffTime = '11:00') => {
+// Determine attendance status based on check-in time (Cutoff: 2:00 PM / 14:00 IST)
+// Shift: 11:00 AM - 6:00 PM (No late charges)
+// Check-in before 2:00 PM -> PRESENT (1.0 day)
+// Check-in after 2:00 PM -> HALF_DAY (0.5 day)
+const determineAttendanceStatus = (checkInDate = new Date(), cutoffTime = '14:00') => {
     const { totalMinutes } = getISTTimeParts(checkInDate);
-    const [cutHour, cutMin] = cutoffTime.split(':').map(Number);
-    const cutoffMinutes = cutHour * 60 + cutMin;
+    const [cutHour, cutMin] = (cutoffTime || '14:00').split(':').map(Number);
+    const cutoffMinutes = cutHour * 60 + (cutMin || 0);
 
-    if (totalMinutes < cutoffMinutes) {
+    if (totalMinutes <= cutoffMinutes) {
         return 'PRESENT';
     } else {
         return 'HALF_DAY';

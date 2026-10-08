@@ -164,8 +164,7 @@ const buildPayslipPDF = (payslip) => {
             const deductions = [
                 { label: `Absent Deduction (${payslip.absentDays || 0}d - PL)`, amount: payslip.absentDeduction || 0 },
                 { label: `Half-Day Deduction (${payslip.halfDays || 0}d @ 50%)`, amount: payslip.halfDayDeduction || 0 },
-                { label: `Late Check-in (${payslip.lateDays || 0}d @ 25%)`, amount: payslip.lateDeduction || 0 },
-                { label: 'Other Deductions', amount: payslip.otherDeductions || 0 }
+                { label: 'Other Deductions / Advance', amount: payslip.otherDeductions || 0 }
             ];
 
             const maxRows = Math.max(earnings.length, deductions.length);

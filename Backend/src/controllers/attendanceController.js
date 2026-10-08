@@ -124,7 +124,7 @@ const checkIn = async (req, res) => {
         } else if (isFestivalWorkingDay && holiday.customCutoffTime) {
             status = determineAttendanceStatus(now, holiday.customCutoffTime);
         } else {
-            status = determineAttendanceStatus(now, policy.halfDayCutoffTime || '11:00');
+            status = determineAttendanceStatus(now, policy.halfDayCutoffTime || '14:00');
         }
 
         let checkInLocationObj = undefined;
@@ -907,7 +907,7 @@ const getAttendanceReport = async (req, res) => {
 };
 
 // Helper to parse manual time strings in 12-hour or 24-hour formats into IST Date
-const parseManualTime = (dateStr, timeStr, defaultTime = '10:00', isCheckOut = false, firstInDate = null) => {
+const parseManualTime = (dateStr, timeStr, defaultTime = '11:00', isCheckOut = false, firstInDate = null) => {
     if (!timeStr || typeof timeStr !== 'string') {
         timeStr = defaultTime;
     }
@@ -927,7 +927,7 @@ const parseManualTime = (dateStr, timeStr, defaultTime = '10:00', isCheckOut = f
     } else if (isAM && hours === 12) {
         hours = 0;
     } else if (!isPM && !isAM && isCheckOut && hours >= 1 && hours <= 11) {
-        // If checkout is e.g. "06:00" without PM and checkIn was morning (e.g. 10:00), it's 18:00
+        // If checkout is e.g. "06:00" without PM and checkIn was morning (e.g. 11:00), it's 18:00
         hours += 12;
     }
 
@@ -972,12 +972,12 @@ const markManualAttendance = async (req, res) => {
 
         // If Admin only wants to punch out an employee (who already checked in)
         if (isCheckOutOnly) {
-            const firstIn = existingRecord?.firstIn || parseManualTime(date, '10:00', '10:00', false);
+            const firstIn = existingRecord?.firstIn || parseManualTime(date, '11:00', '11:00', false);
             const lastOut = parseManualTime(date, checkOutTime || '18:00', '18:00', true, firstIn);
 
             const duration = calculateDuration(firstIn, lastOut);
-            const workingMins = duration.minutes > 0 ? duration.minutes : 480;
-            const workingFormatted = duration.minutes > 0 ? duration.formatted : '8h 0m';
+            const workingMins = duration.minutes > 0 ? duration.minutes : 420;
+            const workingFormatted = duration.minutes > 0 ? duration.formatted : '7h 0m';
 
             const updateData = {
                 status: existingRecord?.status && existingRecord.status !== 'ABSENT' ? existingRecord.status : 'PRESENT',
@@ -1035,17 +1035,17 @@ const markManualAttendance = async (req, res) => {
             updateData.checkInAddress = 'Marked Absent by Admin';
             updateData.checkOutAddress = 'Marked Absent by Admin';
         } else {
-            const inTimeStr = checkInTime || '10:00';
+            const inTimeStr = checkInTime || '11:00';
             const outTimeStr = checkOutTime || '18:00';
 
-            const firstIn = parseManualTime(date, inTimeStr, '10:00', false);
+            const firstIn = parseManualTime(date, inTimeStr, '11:00', false);
             const lastOut = parseManualTime(date, outTimeStr, '18:00', true, firstIn);
 
             updateData.firstIn = firstIn;
             updateData.lastOut = lastOut;
             const duration = calculateDuration(firstIn, lastOut);
-            updateData.totalWorkingMinutes = duration.minutes > 0 ? duration.minutes : 480;
-            updateData.workingHoursFormatted = duration.minutes > 0 ? duration.formatted : '8h 0m';
+            updateData.totalWorkingMinutes = duration.minutes > 0 ? duration.minutes : 420;
+            updateData.workingHoursFormatted = duration.minutes > 0 ? duration.formatted : '7h 0m';
             updateData.checkInAddress = tdiAddress;
             updateData.checkOutAddress = tdiAddress;
             updateData.checkInLocation = {

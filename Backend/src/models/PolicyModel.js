@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const policySchema = new mongoose.Schema({
     companyName: { type: String, default: 'WECICE Delhi' },
-    workStartTime: { type: String, default: '10:00' }, // 10:00 AM
+    workStartTime: { type: String, default: '11:00' }, // 11:00 AM
     workEndTime: { type: String, default: '18:00' },   // 6:00 PM
-    halfDayCutoffTime: { type: String, default: '11:00' }, // 11:00 AM
+    halfDayCutoffTime: { type: String, default: '14:00' }, // 2:00 PM
     workingDays: { 
         type: [String], 
         default: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] 

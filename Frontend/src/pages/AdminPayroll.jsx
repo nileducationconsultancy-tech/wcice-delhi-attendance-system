@@ -162,7 +162,6 @@ const AdminPayroll = () => {
                                         <th className="py-3.5 px-4 text-center">Half Day</th>
                                         <th className="py-3.5 px-4 text-center">Absent</th>
                                         <th className="py-3.5 px-4 text-center text-purple-700">Paid Leave</th>
-                                        <th className="py-3.5 px-4 text-center text-slate-600">Late Days</th>
                                         <th className="py-3.5 px-4 text-center">Paid Days</th>
                                         <th className="py-3.5 px-4">Per Day Rate</th>
                                         <th className="py-3.5 px-4">Deduction</th>
@@ -193,9 +192,6 @@ const AdminPayroll = () => {
                                             </td>
                                             <td className="py-3.5 px-4 text-center font-bold text-purple-700 bg-purple-50/40">
                                                 +{emp.paidLeaveUsed || 0} PL
-                                            </td>
-                                            <td className="py-3.5 px-4 text-center font-semibold text-slate-600">
-                                                {emp.lateDays || 0}
                                             </td>
                                             <td className="py-3.5 px-4 text-center font-extrabold text-blue-700 bg-blue-50/40">
                                                 {emp.paidDays}

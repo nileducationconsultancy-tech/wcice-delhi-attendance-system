@@ -80,12 +80,7 @@ const getEmployeeAttendanceSummary = (employee, month, year, closedHolidayDates,
                 halfDays++;
             } else if (rec.status === 'PRESENT') {
                 presentDays++;
-                // Check if late (between 10:31 AM and 10:59 AM)
-                if (isLateCheckInAfter1030(rec.firstIn)) {
-                    lateDays++;
-                } else {
-                    onTimeDays++;
-                }
+                onTimeDays++;
             } else {
                 absentDays++;
             }
@@ -161,10 +156,8 @@ const calculatePayslipFigures = (employee, summary, manualAdjustments = {}) => {
     // 2. Half Day Deduction (50% of day rate for each half day)
     const halfDayDeduction = Number(((netHalfDays * 0.5) * perDaySalary).toFixed(2));
     
-    // 3. Late Deduction (25% of 1 day salary for each late check-in after 10:30 AM)
-    const isExempt = isLateDeductionExempt(employee);
-    const lateDaysCount = summary.lateDays || 0;
-    const lateDeduction = isExempt ? 0 : Number((lateDaysCount * 0.25 * perDaySalary).toFixed(2));
+    // 3. Late Deduction: None (Timing is 11:00 AM - 6:00 PM with no late charges)
+    const lateDeduction = 0;
 
     // 4. Other Manual Deductions & Adjustments
     const otherDeductions = Number(Math.max(0, Number(manualAdjustments.otherDeductions || 0)).toFixed(2));
@@ -174,7 +167,7 @@ const calculatePayslipFigures = (employee, summary, manualAdjustments = {}) => {
     const paymentStatus = manualAdjustments.paymentStatus || 'Pending';
 
     const grossSalary = Number((monthlySalary + bonus + incentive).toFixed(2));
-    const totalDeduction = Number((absentDeduction + halfDayDeduction + lateDeduction + otherDeductions).toFixed(2));
+    const totalDeduction = Number((absentDeduction + halfDayDeduction + otherDeductions).toFixed(2));
     const netSalary = Number(Math.max(0, Number((grossSalary - totalDeduction).toFixed(2))));
 
     return {

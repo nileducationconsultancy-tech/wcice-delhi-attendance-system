@@ -22,7 +22,7 @@ const AdminAttendance = () => {
         employeeName: '',
         date: todayStr,
         status: 'PRESENT',
-        checkInTime: '10:00',
+        checkInTime: '11:00',
         checkOutTime: '18:00',
         remarks: 'GPS issue override approved by Admin'
     });
@@ -92,7 +92,7 @@ const AdminAttendance = () => {
         };
     }, [records]);
 
-    const formatTimeTo24Hour = (timeStr, defaultTime = '10:00') => {
+    const formatTimeTo24Hour = (timeStr, defaultTime = '11:00') => {
         if (!timeStr || timeStr === '--:--') return defaultTime;
         const clean = timeStr.trim();
         if (/^\d{2}:\d{2}$/.test(clean)) return clean;
@@ -108,7 +108,7 @@ const AdminAttendance = () => {
 
     const calculateLiveDuration = (checkIn, checkOut, status) => {
         if (status === 'ABSENT') return '0h 0m';
-        if (!checkIn || !checkOut) return '8h 0m';
+        if (!checkIn || !checkOut) return '7h 0m';
         const inParts = checkIn.split(':').map(Number);
         let outParts = checkOut.split(':').map(Number);
         let inMins = (inParts[0] || 0) * 60 + (inParts[1] || 0);
@@ -130,7 +130,7 @@ const AdminAttendance = () => {
             employeeName: emp.name,
             date: selectedDate,
             status: emp.status === 'HALF_DAY' ? 'PRESENT' : (emp.status === 'ABSENT' ? 'PRESENT' : emp.status || 'PRESENT'),
-            checkInTime: formatTimeTo24Hour(emp.firstIn, '10:00'),
+            checkInTime: formatTimeTo24Hour(emp.firstIn, '11:00'),
             checkOutTime: formatTimeTo24Hour(emp.lastOut, '18:00'),
             remarks: 'Manual attendance override approved by Admin'
         });
@@ -144,7 +144,7 @@ const AdminAttendance = () => {
             employeeName: activeEmployees[0]?.name || '',
             date: selectedDate,
             status: 'PRESENT',
-            checkInTime: '10:00',
+            checkInTime: '11:00',
             checkOutTime: '18:00',
             remarks: 'GPS issue / Technical trouble override'
         });
@@ -198,7 +198,7 @@ const AdminAttendance = () => {
             employeeId: emp._id,
             employeeName: emp.name,
             date: selectedDate,
-            checkInFormatted: emp.firstIn !== '--:--' ? emp.firstIn : '10:00 AM',
+            checkInFormatted: emp.firstIn !== '--:--' ? emp.firstIn : '11:00 AM',
             checkOutTime: '18:00',
             remarks: 'Employee forgot check-out, manual out recorded by Admin'
         });
@@ -687,7 +687,7 @@ const AdminAttendance = () => {
                                 <div className="flex items-center justify-between bg-blue-50 rounded-xl px-3.5 py-2 text-xs text-blue-900 font-semibold border border-blue-200">
                                     <span>Calculated Working Hours:</span>
                                     <span className="font-bold text-blue-700 bg-white px-2 py-0.5 rounded-md border border-blue-200 shadow-2xs">
-                                        {calculateLiveDuration(formatTimeTo24Hour(punchOutModal.checkInFormatted, '10:00'), punchOutModal.checkOutTime, 'PRESENT')}
+                                        {calculateLiveDuration(formatTimeTo24Hour(punchOutModal.checkInFormatted, '11:00'), punchOutModal.checkOutTime, 'PRESENT')}
                                     </span>
                                 </div>
 

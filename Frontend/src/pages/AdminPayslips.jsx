@@ -317,7 +317,7 @@ const AdminPayslips = () => {
 
     const modalTotalDeduction = useMemo(() => {
         if (!adjustmentModal.payslip) return 0;
-        return Number((adjustmentModal.payslip.absentDeduction + adjustmentModal.payslip.halfDayDeduction + (adjustmentModal.payslip.lateDeduction || 0) + Number(adjustmentModal.otherDeductions || 0)).toFixed(2));
+        return Number((adjustmentModal.payslip.absentDeduction + adjustmentModal.payslip.halfDayDeduction + Number(adjustmentModal.otherDeductions || 0)).toFixed(2));
     }, [adjustmentModal]);
 
     const modalNetSalary = useMemo(() => {

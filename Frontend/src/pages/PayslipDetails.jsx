@@ -346,11 +346,7 @@ const PayslipDetails = () => {
                                         <span className="font-semibold text-rose-600">₹{Number(payslip.halfDayDeduction || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-slate-600">Late Check-in Deduction ({payslip.lateDays || 0} Days @ 25%)</span>
-                                        <span className="font-semibold text-rose-600">₹{Number(payslip.lateDeduction || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-slate-600">Other Deductions</span>
+                                        <span className="text-slate-600">Other Deductions / Advance</span>
                                         <span className="font-semibold text-rose-600">₹{Number(payslip.otherDeductions || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                                     </div>
                                 </div>

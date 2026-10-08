@@ -163,7 +163,7 @@ const Dashboard = () => {
                             Good Morning, {user?.name || user?.email?.split('@')[0] || 'Employee'} 👋
                         </h1>
                         <p className="text-slate-500 mt-1 text-xs sm:text-sm font-medium">
-                            Working hours: <span className="font-semibold text-slate-700">10:00 AM – 06:00 PM</span>
+                            Working hours: <span className="font-semibold text-slate-700">11:00 AM – 06:00 PM</span>
                         </p>
                     </div>
                     <div className="bg-slate-900 text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-sm text-center sm:text-right w-full sm:w-auto">
@@ -254,7 +254,7 @@ const Dashboard = () => {
 
                                 <div className="pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
                                     <div className="text-xs text-slate-500">
-                                        Shift ends at <span className="font-semibold text-slate-700">06:00 PM</span>. Checking out before <span className="font-semibold text-amber-600">05:00 PM</span> is marked as <span className="font-semibold text-amber-600">Half Day (0.5 day deduction)</span>.
+                                        Shift ends at <span className="font-semibold text-slate-700">06:00 PM</span>. Official shift timing: <span className="font-semibold text-slate-700">11:00 AM – 06:00 PM (7 Hours)</span>.
                                     </div>
                                     <button 
                                         onClick={() => initiateAction('CHECK_OUT')}
